@@ -1,29 +1,16 @@
-import * as React from 'react';
-import { Text, View } from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from '../Screens/HomeScreen';
+import RecipeScreen from '../Screens/RecipeScreen';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import createAppContainer from 'react-navigation';
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home</Text>
-    </View>
-  );
-}
+const MainNavigator = createBottomTabNavigator();
 
-function RecipeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Recipe</Text>
-    </View>
-  );
-}
-
-const Tab = createBottomTabNavigator();
-
-export default function App() {
-  return (
+function MainComponent()
+ {
+    return (
     <NavigationContainer style={{ backgroundColor: '#605F60' }}>
       <Tab.Navigator screenOptions={({ route })  => ({
           tabBarIcon: ({ focused, color, size}) => {
@@ -47,3 +34,5 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+export default MainComponent;
