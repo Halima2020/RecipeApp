@@ -39,18 +39,18 @@ import React,  { Component } from 'react';
     
 
     fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe.id}/information`, {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-		"x-rapidapi-key": "3238d22cd5mshb9ac4435462de68p1eaed6jsn9d2ff6bfc7f7"
-	    }
+"method": "GET",
+"headers": {
+"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+"x-rapidapi-key": "3238d22cd5mshb9ac4435462de68p1eaed6jsn9d2ff6bfc7f7"
+    }
     })
     .then(response => response.json())  
 .then(response => {
-	console.log(response.instructions);//Open new Stack Navigator screen and on that screen, show recipe
+console.log(response.instructions);//Open new Stack Navigator screen and on that screen, show recipe
 })
 .catch(err => {
-	console.log(err);
+console.log(err);
 });
    }
 
@@ -110,9 +110,12 @@ import React,  { Component } from 'react';
         backgroundColor: '#fff',
       },
      TextInput: {
-        padding: 20, 
-        borderColor: 'tomato',
-        borderWidth: 2,
+        padding:10, 
+       borderColor: 'tomato',
+       borderWidth: 1,
+       borderRadius: 15,
+       width: 400,
+       margin:5
      },
      TextStyle: {
         fontSize: 20,

@@ -69,9 +69,12 @@ import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView } from
        backgroundColor: '#fff',
      },
      TextInput: {
-        padding: 20, 
-        borderColor: 'tomato',
-        borderWidth: 2,
+       padding:10, 
+       borderColor: 'tomato',
+       borderWidth: 1,
+       borderRadius: 15,
+       width: 400,
+       margin:5
      },
      item: {
          flex: 1,

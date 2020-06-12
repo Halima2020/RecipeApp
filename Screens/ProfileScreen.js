@@ -64,20 +64,20 @@ import logo from '../assets/logo.png';
     container: {
       flex: 1,
       paddingTop: 100,
-      paddingBottom: 110,
+      paddingBottom: 150,
       backgroundColor: '#fff',
-      paddingLeft: 25,
+      paddingLeft: 10,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       height: '100%',
     },
     TextInput: {
-       padding: 20, 
+       padding:10, 
        borderColor: 'tomato',
-       borderWidth: 2,
-       borderRadius: 35,
-       width: 360,
+       borderWidth: 1,
+       borderRadius: 15,
+       width: 320,
        margin:5
     },
     item: {
