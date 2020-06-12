@@ -1,5 +1,5 @@
 import React,  { Component } from 'react';
- import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView, FlatList  } from 'react-native';
+ import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
  
  class RecipeScreen  extends Component {
     constructor(props){
@@ -11,8 +11,10 @@ import React,  { Component } from 'react';
            };
        this.onSearch = this.onSearch.bind(this);
    };
+   
  
    onSearch() {
+    const url = "";
        this.setState({isLoading:true});
        return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?q=/${this.state.result}`, {
         "method": "GET",
@@ -32,13 +34,35 @@ import React,  { Component } from 'react';
        });
        
    }
+
+   openRecipe(recipe){ 
+    
+
+    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe.id}/information`, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+		"x-rapidapi-key": "3238d22cd5mshb9ac4435462de68p1eaed6jsn9d2ff6bfc7f7"
+	    }
+    })
+    .then(response => response.json())  
+.then(response => {
+	console.log(response.instructions);//Open new Stack Navigator screen and on that screen, show recipe
+})
+.catch(err => {
+	console.log(err);
+});
+   }
+
    renderItem = (result) => (
       <View style={styles.view}>
-          <Text>{result.item.title}</Text>
-          <Text>{result.item.readyInMinutes}</Text>
-          <Text>{result.item.servings}</Text>
-          <Text>{result.item.sourceUrl}</Text>
-          <Text>{result.item.summary}</Text>
+          <TouchableOpacity style={{borderWidth: 1}}
+          onPress={() => this.openRecipe(result.item)}
+        >
+          <Text>Title: {result.item.title}</Text>
+          <Text>Time: {result.item.readyInMinutes}</Text>
+          <Text>Servings: {result.item.servings}</Text>
+          </TouchableOpacity>
           </View> 
    );
    

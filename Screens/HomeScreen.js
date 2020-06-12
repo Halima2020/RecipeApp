@@ -1,6 +1,5 @@
 import React,  { Component } from 'react';
- import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView } from 'react-native';
-
+import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView } from 'react-native';
  class HomeScreen extends Component {
      constructor(props){
          super(props)
@@ -51,7 +50,7 @@ import React,  { Component } from 'react';
              onChangeText={(question) => this.setState({question})}
              onSubmitEditing ={this.onSearch}
             />
-            <View>
+            <View style={styles.view}>
                 {this.state.answer !=  null && <Text>{this.state.answer}</Text>}
             </View>
             </View>
@@ -71,7 +70,6 @@ import React,  { Component } from 'react';
      },
      TextInput: {
         padding: 20, 
-        alignContent: 'center', 
         borderColor: 'tomato',
         borderWidth: 2,
      },
@@ -80,6 +78,10 @@ import React,  { Component } from 'react';
          alignSelf: 'stretch',
          margin: 10,
          justifyContent: 'center',
+     },
+     view: {
+       padding: 20,
+       textAlign: 'center'
      }
    });
 
