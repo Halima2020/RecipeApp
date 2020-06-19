@@ -1,6 +1,6 @@
 import * as React from 'react';
 import  MainComponent from './Components/MainComponent';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 export default function App() {
   return (

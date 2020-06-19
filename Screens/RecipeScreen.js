@@ -1,11 +1,12 @@
 import React,  { Component } from 'react';
- import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+ import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView, FlatList, TouchableOpacity, Image } from 'react-native';
  
  class RecipeScreen  extends Component {
     constructor(props){
         super(props)
         this.state = {
             search: null,
+            instructions: '',
             result : [],
             isLoading: false, 
            };
@@ -36,9 +37,10 @@ import React,  { Component } from 'react';
    }
 
    openRecipe(recipe){ 
-    
 
-    fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe.id}/information`, {
+    const url = "";
+    this.setState({isLoading:true});
+    return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipe.id}/information`, {
 "method": "GET",
 "headers": {
 "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
@@ -53,20 +55,32 @@ console.log(response.instructions);//Open new Stack Navigator screen and on that
 console.log(err);
 });
    }
+   
 
    renderItem = (result) => (
       <View style={styles.view}>
           <TouchableOpacity style={{borderWidth: 1}}
           onPress={() => this.openRecipe(result.item)}
         >
+          <Image src = {result.item.image} />
           <Text>Title: {result.item.title}</Text>
           <Text>Time: {result.item.readyInMinutes}</Text>
           <Text>Servings: {result.item.servings}</Text>
           </TouchableOpacity>
           </View> 
+          
    );
    
-
+   render(instructions) {
+    return (
+       <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
+          <Text>
+             Instructions: {result.item.instructions} 
+          </Text>
+       </View>
+    )
+ }
+   
    render (){
        console.log("result:", this.state.result);
        if (this.state.isLoading) {
@@ -74,8 +88,9 @@ console.log(err);
                <View style={styles.container}>
                    <ActivityIndicator />
                </View>
-           )
-       } else {
+           );
+       } 
+       else {
        return (
         <ScrollView>
           <View style={styles.container}>
@@ -95,6 +110,7 @@ console.log(err);
            </View>
            </ScrollView>
          );
+         
          }
    }
 
@@ -115,7 +131,7 @@ console.log(err);
        borderWidth: 1,
        borderRadius: 15,
        width: 400,
-       margin:5
+       margin:5,
      },
      TextStyle: {
         fontSize: 20,

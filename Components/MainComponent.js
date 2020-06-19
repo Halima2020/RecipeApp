@@ -6,8 +6,6 @@ import React from 'react';
  import RecipeScreen from '../Screens/RecipeScreen';
  import Icon from 'react-native-vector-icons/FontAwesome';
 
-
-
  function MainComponent() { 
 
     const Tab = createBottomTabNavigator();

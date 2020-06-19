@@ -1,57 +1,83 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native';
-import { Button } from 'react-native-elements';
+import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView, TouchableOpacity, Image, Alert } from 'react-native';
+import { Button, CheckBox } from 'react-native-elements';
 import logo from '../assets/logo.png'; 
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
  class ProfileScreen extends Component {
-    /* constructor(props){
-         super(props)
-         this.state = {
-             question: null,
-             image: null,
-             answer: null, 
-             isLoading: false, 
-            };
-        this.onSearch = this.onSearch.bind(this);
-    };
-  
-    /* onSearch() {
-        this.setState({isLoading:true});
-        return fetch(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quickAnswer?q=/${this.state.question}`, {
-        "method": "GET",
-        "headers": {
-        "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-        "x-rapidapi-key": "3238d22cd5mshb9ac4435462de68p1eaed6jsn9d2ff6bfc7f7",
-        }
+    constructor(props) {
+        console.log(props);
+        super(props);
+        this.state = {
+            email: '',
+            password: '',
+            loading: false,
+            remember: false
+        };
+    }
+
+    onChangeHandle(state, value){
+        this.setState({
+            [state]: value
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            this.setState({answer: data.answer});
-            this.setState({isLoading:false});
-        })
-        .catch(err => {
-        console.log(err);
-        });
-        
-    } */
+    }
+
+    doLogin() {
+      const { username, password } = this.state;
+      const req = {
+          "email": username,
+          "password": password
+      }
+      axios.post("https://reqres.in/api/login", req)
+      .then(
+          res => {
+            alert("Welcome to the Recipe App");
+          },
+          err => {
+              alert("Username password is wrong");
+          }
+      )  
+    }
 
     render(){
+        const { username, password, loading } = this.state;
         return (
             <ScrollView >
            <View style={styles.container}>
-           <Image source={logo} style={{ width: 150, height: 150}} />
+           <Image source={logo} style={{ width: 125, height: 125, margin: 20}} />
               <TextInput style={styles.TextInput}
+              onChangeText={(value) => this.onChangeHandle('username' , value)}
               placeholder="Email"
+              value={username}
             />
             <TextInput style={styles.TextInput}
-              placeholder="password"
+            onChangeText={(value) => this.onChangeHandle('password' , value)}
+            secureTextEntry={true}
+            placeholder="password"
+            value={password}
             />
+            <TouchableOpacity>
+            <CheckBox
+                        title='Remember Me'
+                        center
+                        checked={this.state.remember}
+                        onPress={() => this.setState({remember: !this.state.remember})}
+                        containerStyle={styles.formCheckbox}
+                    />
+        </TouchableOpacity>
              <Button buttonStyle={styles.button}
              title='Log In' 
-             color='#ff6347'/>
+             color='#ff6347'
+             onPress={() => this.doLogin()}
+             disabled={loading}
+             /*onPress={() => alert('Welcome To the Recipe App!')}*/ />
+        
           <Text style={styles.signupText}>Do not have an account yet?</Text>
-					<TouchableOpacity><Text> Signup</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => alert('SignUp on the website')}>
+              <Text style={styles.signupText}
+              onPress={() => this.onChangeHandle}> Sign Up</Text>
+              </TouchableOpacity>
             </View>
             </ScrollView>
           )
@@ -86,19 +112,25 @@ import logo from '../assets/logo.png';
         margin: 10,
         justifyContent: 'center',
     },
+    formCheckbox: {
+        margin: 8,
+        backgroundColor: null
+    },
     view: {
       padding: 20,
       textAlign: 'center'
     }, 
     button: {
         backgroundColor: '#ff6347',
+        margin: 15,
+        
     },
     signupText: {
-        flexGrow: 1,
       alignItems:'flex-end',
       justifyContent :'center',
-      paddingVertical:16,
-      flexDirection:'row'
+      paddingVertical:10,
+      flexDirection:'row',
+      fontSize: 16,
     },
   });
 
