@@ -23,7 +23,6 @@ import { View, Text, StyleSheet, ActivityIndicator, TextInput, ScrollView } from
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             this.setState({answer: data.answer});
             this.setState({isLoading:false});
         })

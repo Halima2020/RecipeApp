@@ -5,6 +5,7 @@ import React from 'react';
  import HomeScreen from '../Screens/HomeScreen';
  import RecipeScreen from '../Screens/RecipeScreen';
  import Icon from 'react-native-vector-icons/FontAwesome';
+import RecipeNavigator from '../Screens/RecipeNavigator';
 
  function MainComponent() { 
 
@@ -33,7 +34,7 @@ import React from 'react';
                 }}>
               <Tab.Screen name="Profile" component={ProfileScreen} />
               <Tab.Screen name="Search" component={HomeScreen} />
-              <Tab.Screen name="Recipe" component={RecipeScreen} />
+              <Tab.Screen name="Recipe" component={RecipeNavigator} />
             </Tab.Navigator>
           </NavigationContainer>
         );
